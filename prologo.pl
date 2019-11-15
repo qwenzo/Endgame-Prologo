@@ -1,10 +1,11 @@
-ironman(loc(1, 2), [],  s0).
+ironman(loc(1, 2), [],  s0). /* ironman, Y, X, situation zero, number of stones remaining */
 thanos(loc(3, 4)).
 stone(loc(1, 1)).
 stone(loc(2, 1)).
 stone(loc(2, 2)).
 stone(loc(3, 3)).
 grid_size(5, 5).
+locations([loc(1,1), loc(2, 1), loc(2, 2), loc(3, 3)]).
 
 collect(collect, 0,0).
 move(down, -1, 0).
@@ -15,7 +16,8 @@ move(right, 0, -1).
 snapped(result(A, S)):-
 	A = snap,
 	thanos(loc(Y, X)),
-	ironman(loc(Y, X), [loc(1,1), loc(2, 1), loc(2, 2), loc(3, 3)], S).
+	locations(L),
+	ironman(loc(Y, X), L, S).
 
 call_with_depth(DepthLimit, ExceddedDepth, S):-
 	call_with_depth_limit(snapped(S), DepthLimit, ExceddedDepth).
