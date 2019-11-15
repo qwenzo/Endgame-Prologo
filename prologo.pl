@@ -1,4 +1,4 @@
-ironman(loc(1, 2), [],  s0). /* ironman, Y, X, situation zero, number of stones remaining */
+ironman(loc(1, 2), [],  s0).
 thanos(loc(3, 4)).
 stone(loc(1, 1)).
 stone(loc(2, 1)).
@@ -33,27 +33,6 @@ ironman(loc(Y, X), StonesNew, result(A, S)):-
 	allowed(OY, OX),
 	ironman(loc(OY, OX), StonesNew, S).
 	
-
-/*
-allowed(Y, X),
-	move(A, SY, SX),
-	OY is Y + SY, OX is X+SX,
-	allowed(OY, OX),
-	check_stones(loc(OY, OX), Stones, StonesNew),
-	ironman(loc(OY, OX), Stones, S), !.
-*/
-/*
-
-ironman(loc(Y, X), StonesNew, result(A, S)):-
-	(A = collect,
-	check_stones(loc(Y, X), Stones, StonesNew),
-	ironman(loc(Y, X), Stones, S));
-	allowed(Y, X),
-	move(A, SY, SX),
-	OY is Y + SY, OX is X+SX,
-	allowed(OY, OX),
-	ironman(loc(OY, OX), Stones, S), !.
-*/
 member(X, [X|_]).
 member(X, [_|T]):- member(X, T).
 
