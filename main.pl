@@ -1,22 +1,6 @@
 %===============intial sitaution===============%
 
-%intial status of ironman with his location and the hold stones.
-ironman(loc(1, 2), [],  s0). 
-
-%intial location of thanos.
-thanos(loc(3, 4)).
-
-%intial location of the stones.
-stone(loc(1, 1)).
-stone(loc(2, 1)).
-stone(loc(2, 2)).
-stone(loc(3, 3)).
-
-%size of the grid
-grid_size(5, 5).
-
-%locations of the stones to be collected.
-locations([loc(1,1), loc(2, 1), loc(2, 2), loc(3, 3)]).
+:- include('kb1').
 
 %===============movements===============%
 
