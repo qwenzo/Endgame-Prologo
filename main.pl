@@ -34,6 +34,9 @@ ironman(loc(Y, X), StonesNew, result(A, S)):-
 	OY is Y + SY, OX is X+SX,
 	allowed(OY, OX),
 	ironman(loc(OY, OX), StonesNew, S).
+
+check_stones(loc(Y, X), StonesList, ReturnedStones):-
+	delete_each(loc(Y, X), StonesList, ReturnedStones).
 	
 member(X, [X|_]).
 member(X, [_|T]):- member(X, T).
@@ -42,10 +45,7 @@ delete_each(X, L, L):-
 	\+member(X, L).
 delete_each(X, [X|L], L).
 delete_each(X, [Y|Ys], [Y|Zs]) :-
-	member(X, Ys),delete_each(X, Ys, Zs).	
-
-check_stones(loc(Y, X), StonesList, ReturnedStones):-
-	delete_each(loc(Y, X), StonesList, ReturnedStones), !.
+	delete_each(X, Ys, Zs).	
 	
 allowed(Y, X):-
     grid_size(N, M),
