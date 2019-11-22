@@ -20,33 +20,23 @@ goal(result(A, S)):-
 
 %===============succesor state axioms===============%
 
-
-% this is true, if ironman has all the stones and in he same cell as thanos.	
+% this is true, if the new stones list 
+% is a result of deleting the current location from the old stones list.	
 ironman(loc(Y, X), StonesNew, result(A, S)):-
 	A = collect,
 	stone(loc(Y, X)),
 	member(loc(Y,X), StonesNew),
-	check_stones(loc(Y, X), StonesNew, Stones),
+	delete(loc(Y, X), StonesNew, Stones),
 	ironman(loc(Y, X), Stones, S).
-	
+
+% this is true, if the current location is a result of applying a movement on the last sitaution
 ironman(loc(Y, X), StonesNew, result(A, S)):-
 	move(A, SY, SX),
 	OY is Y + SY, OX is X+SX,
 	allowed(OY, OX),
 	ironman(loc(OY, OX), StonesNew, S).
-
-check_stones(loc(Y, X), StonesList, ReturnedStones):-
-	delete_each(loc(Y, X), StonesList, ReturnedStones).
 	
-member(X, [X|_]).
-member(X, [_|T]):- member(X, T).
-
-delete_each(X, L, L):-
-	\+member(X, L).
-delete_each(X, [X|L], L).
-delete_each(X, [Y|Ys], [Y|Zs]) :-
-	delete_each(X, Ys, Zs).	
-	
+% this is true if the location is part of the grid
 allowed(Y, X):-
     grid_size(N, M),
 	X >= 0,
@@ -54,3 +44,10 @@ allowed(Y, X):-
 	N2 is N-1,
 	M2 is M-1,
 	X =< M2, Y =< N2.
+
+%===============utils===============%
+member(X, [X|_]).
+member(X, [_|T]):- member(X, T).
+
+delete(X, [X|L], L).
+delete(X, [Y|Ys], [Y|Zs]):-delete(X, Ys, Zs).
