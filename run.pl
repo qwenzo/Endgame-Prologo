@@ -2,10 +2,7 @@
 
 :- [main].
 
-% this holds the intial depth limit of the algorthim.
-depth_limit(1).
-
-% this is true, if plan returns a S.
+% this is true, if find_solution returns a S.
 snapped(S):-
     find_solution(S, 1), !.
 
